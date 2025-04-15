@@ -1,0 +1,59 @@
+openapi: 3.1.0
+info:
+  title: GeoLocator API
+  description: Получает адрес по координатам и координаты по адресу с помощью Google Maps Geocoding API
+  version: 1.0.0
+servers:
+  - url: https://geolocator-ram1.onrender.com
+paths:
+  /get-location:
+    get:
+      summary: Получить адрес по координатам
+      operationId: getLocation
+      parameters:
+        - in: query
+          name: lat
+          required: true
+          schema:
+            type: string
+          description: Широта
+        - in: query
+          name: lon
+          required: true
+          schema:
+            type: string
+          description: Долгота
+      responses:
+        '200':
+          description: Успешный ответ с адресом
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  address:
+                    type: string
+
+  /get-coordinates:
+    get:
+      summary: Получить координаты по адресу
+      operationId: getCoordinates
+      parameters:
+        - in: query
+          name: address
+          required: true
+          schema:
+            type: string
+          description: Адрес, по которому нужно определить координаты
+      responses:
+        '200':
+          description: Успешный ответ с координатами
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lat:
+                    type: number
+                  lon:
+                    type: number
