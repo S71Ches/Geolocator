@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file  # добавили send_file
 import requests
 
 app = Flask(__name__)
@@ -63,6 +63,12 @@ def get_location():
 
     address = data["results"][0]["formatted_address"]
     return jsonify({"address": address})
+
+
+# 🧾 Отдача OpenAPI YAML для GPTs
+@app.route("/openapi.yaml")
+def serve_openapi():
+    return send_file("openapi.yaml", mimetype="text/yaml")
 
 
 if __name__ == "__main__":
