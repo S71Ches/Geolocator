@@ -71,5 +71,11 @@ def serve_openapi():
     return send_file("openapi.yaml", mimetype="text/yaml")
 
 
+# 👋 Пинг для Render'а
+@app.route("/", methods=["GET"])
+def wake():
+    return jsonify({"status": "awake"}), 200
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
