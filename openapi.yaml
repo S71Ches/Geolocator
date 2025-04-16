@@ -1,11 +1,27 @@
 openapi: 3.1.0
 info:
   title: GeoLocator API
-  description: Получает адрес по координатам и координаты по адресу с помощью Google Maps Geocoding API
-  version: 1.0.0
+  description: Получает адрес по координатам, координаты по адресу и может пинговать Render
+  version: 1.1.0
 servers:
   - url: https://geolocator-ram1.onrender.com
 paths:
+  /:
+    get:
+      summary: Пинг Render-сервера
+      operationId: wakeRender
+      responses:
+        '200':
+          description: Сервер успешно проснулся
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: awake
+
   /get-location:
     get:
       summary: Получить адрес по координатам
